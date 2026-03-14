@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>SOMALIA CRMP · ULTIMATE + ADS</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* CYBER-NOIR ULTIMATE + ADS */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #050505;
+            font-family: 'Inter', sans-serif;
+            color: #e0e0e0;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* POLICE LIGHTS ANIMATION - ENHANCED */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            width: 80vmax;
+            height: 80vmax;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.2;
+            animation: cyberPulse 10s infinite alternate ease-in-out;
+            z-index: -2;
+            pointer-events: none;
+        }
+        body::before {
+            background: radial-gradient(circle, #ff0000 0%, #8b0000 80%);
+            top: -20%;
+            left: -20%;
+            animation-duration: 8s;
+        }
+        body::after {
+            background: radial-gradient(circle, #0066ff 0%, #000066 80%);
+            bottom: -20%;
+            right: -20%;
+            animation-duration: 12s;
+            animation-delay: 2s;
+        }
+        
+        @keyframes cyberPulse {
+            0% { opacity: 0.1; transform: scale(0.8) rotate(0deg); }
+            50% { opacity: 0.3; transform: scale(1.3) rotate(5deg); }
+            100% { opacity: 0.2; transform: scale(1) rotate(-5deg); }
+        }
+
+        /* CYBER GRID */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* GLASSMORPHISM ULTRA */
+        .glass-panel {
+            background: rgba(8, 8, 15, 0.4);
+            backdrop-filter: blur(16px) saturate(200%);
+            -webkit-backdrop-filter: blur(16px) saturate(200%);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            border-radius: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-panel:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 15px 45px rgba(139, 92, 246, 0.2);
+        }
+        
+        .glass-panel-thick {
+            background: rgba(5, 5, 10, 0.75);
+            backdrop-filter: blur(20px) saturate(200%);
+            -webkit-backdrop-filter: blur(20px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 2rem;
+        }
+
+        /* ANIMATIONS */
+        .hover-lift {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 30px -10px rgba(139, 92, 246, 0.5);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.7), 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+        
+        /* ADS STYLES */
+        .ad-container {
+            width: 300px;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 2px dashed rgba(139, 92, 246, 0.3);
+            border-radius: 1.5rem;
+            transition: all 0.3s;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .ad-container:hover {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+        }
+        
+        .ad-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .ad-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .ad-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(0, 0, 0, 0.3));
+        }
+        
+        /* SPA SYSTEM */
+        .spa-section { display: none; }
+        .spa-section.active-section { display: block; }
+
+        /* ADMIN MODE */
+        body.admin-mode .admin-only { display: block !important; }
+        body.admin-mode .user-only { display: none !important; }
+        body.admin-mode .glass-panel { border-color: rgba(220, 38, 38, 0.3); }
+        
+        .admin-only { display: none; }
+
+        /* TOAST */
+        #toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid #8b5cf6;
+            border-radius: 100px;
+            padding: 0.8rem 2rem;
+            color: white;
+            font-weight: 500;
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+        }
+        #toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #8b5cf6; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6d28d9; }
+
+        /* ADMIN PANEL FULL PAGE */
+        .admin-page {
+            min-height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+        }
+        
+        /* ADS GRID */
+        .ads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body class="antialiased relative">
+
+    <!-- CYBER GRID BACKGROUND -->
+    <div class="cyber-grid"></div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="sticky top-4 z-40 px-4">
+        <div class="glass-panel-thick max-w-5xl mx-auto p-2 flex flex-wrap justify-center gap-1">
+            <button data-section="home" class="nav-btn px-4 py-3 rounded-xl text-sm font-rajdhani font-bold transition-all hover:bg-purple-500/20 active-section">
+                <i class="fas fa-home mr-2"></i>Home
+            </button>
+            <button data-section="news" class="nav-btn px-4 py-3 rounded-xl text-sm font-rajdhani font-bold transition-all hover:bg-purple-500/20">
+                <i class="fas fa-newspaper mr-2"></i>Wararka
+            </button>
+            <button data-section="shop" class="nav-btn px-4 py-3 rounded-xl text-sm font-rajdhani font-bold transition-all hover:bg-purple-500/20">
+                <i class="fas fa-store mr-2"></i>Dukaan
+            </button>
+            <button data-section="factions" class="nav-btn px-4 py-3 rounded-xl text-sm font-rajdhani font-bold transition-all hover:bg-purple-500/20">
+                <i class="fas fa-users mr-2"></i>Hoggaanka
+            </button>
+            <button data-section="staff" class="nav-btn px-4 py-3 rounded-xl text-sm font-rajdhani font-bold transition-all hover:bg-purple-500/20">
+                <i class="fas fa-shield-halved mr-2"></i>Staff
+            </button>
+            <button data-section="stats" class="nav-btn px-4 py-3 rounded-xl text-sm font-rajdhani font-bold transition-all hover:bg-purple-500/20">
+                <i class="fas fa-chart-line mr-2"></i>Tirakoob
+            </button>
+            <button data-section="rules" class="nav-btn px-4 py-3 rounded-xl text-sm font-rajdhani font-bold transition-all hover:bg-purple-500/20">
+                <i class="fas fa-scale-balanced mr-2"></i>Xeerarka
+            </button>
+            <button data-section="adminpage" class="nav-btn px-4 py-3 rounded-xl text-sm font-rajdhani font-bold transition-all hover:bg-purple-500/20">
+                <i class="fas fa-user-shield mr-2"></i>Admin
+            </button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container max-w-7xl mx-auto px-4 py-8">
+
+        <!-- HOME SECTION -->
+        <section id="home" class="spa-section active-section">
+            <!-- Hero -->
+            <div class="glass-panel p-8 md:p-12 text-center relative overflow-hidden mb-8">
+                <h1 class="text-6xl md:text-8xl font-rajdhani font-bold text-glow bg-gradient-to-r from-purple-400 to-purple-200 bg-clip-text text-transparent mb-4">
+                    SOMALIA CRMP
+                </h1>
+                <p class="text-xl md:text-2xl text-white/70 mb-8">Where Legends Are Made in Mogadishu</p>
+                
+                <!-- LIVE PLAYER COUNTER -->
+                <div class="inline-flex items-center gap-4 bg-black/40 border-2 border-green-500/30 rounded-full px-8 py-4 mb-8">
+                    <span class="relative flex h-5 w-5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-5 w-5 bg-green-500"></span>
+                    </span>
+                    <span class="font-rajdhani text-4xl font-bold text-green-400" id="playerCount">2,847</span>
+                    <span class="text-white/70 text-lg">Ciyaartoy Online</span>
+                </div>
+
+                <!-- ADS IN HOME (300x300) -->
+                <div class="flex justify-center mb-8">
+                    <div class="ad-container" id="homeAd">
+                        <!-- Ad will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-purple-800 font-bold text-lg hover-lift">
+                        <i class="fas fa-download mr-2"></i> Download
+                    </button>
+                    <button class="px-8 py-4 rounded-xl bg-white/5 border border-white/10 font-bold text-lg hover-lift">
+                        <i class="fas fa-play mr-2"></i> Play Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="glass-panel p-6 text-center hover-lift">
+                    <i class="fas fa-server text-3xl text-purple-400 mb-3"></i>
+                    <div class="font-rajdhani font-bold text-2xl">99.9%</div>
+                    <div class="text-white/50">Uptime</div>
+                </div>
+                <div class="glass-panel p-6 text-center hover-lift">
+                    <i class="fas fa-users text-3xl text-purple-400 mb-3"></i>
+                    <div class="font-rajdhani font-bold text-2xl">50K+</div>
+                    <div class="text-white/50">Players</div>
+                </div>
+                <div class="glass-panel p-6 text-center hover-lift">
+                    <i class="fas fa-car text-3xl text-purple-400 mb-3"></i>
+                    <div class="font-rajdhani font-bold text-2xl">500+</div>
+                    <div class="text-white/50">Vehicles</div>
+                </div>
+                <div class="glass-panel p-6 text-center hover-lift">
+                    <i class="fas fa-clock text-3xl text-purple-400 mb-3"></i>
+                    <div class="font-rajdhani font-bold text-2xl">24/7</div>
+                    <div class="text-white/50">Support</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEWS SECTION -->
+        <section id="news" class="spa-section">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-rajdhani font-bold text-glow"><i class="fas fa-newspaper mr-3 text-purple-400"></i>Wararka</h2>
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
+                    <span id="serverStatus" class="text-green-400 font-bold">Server Online</span>
+                </div>
+            </div>
+
+            <!-- News Grid -->
+            <div id="newsContainer" class="grid gap-6"></div>
+
+            <!-- ADS IN NEWS -->
+            <div class="flex justify-center my-8">
+                <div class="ad-container" id="newsAd"></div>
+            </div>
+        </section>
+
+        <!-- SHOP SECTION -->
+        <section id="shop" class="spa-section">
+            <h2 class="text-3xl font-rajdhani font-bold text-glow mb-6"><i class="fas fa-gem mr-3 text-purple-400"></i>VIP Shop</h2>
+            
+            <!-- VIP Packages -->
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="glass-panel p-8 text-center hover-lift" data-vip="bronze">
+                    <i class="fas fa-crown text-5xl text-amber-500 mb-4"></i>
+                    <h3 class="font-rajdhani text-3xl font-bold">BRONZE</h3>
+                    <p class="text-4xl font-bold my-4 text-amber-400" id="priceBronze">$5.99</p>
+                    <button class="buy-btn w-full bg-gradient-to-r from-amber-600 to-amber-800 py-3 rounded-xl font-bold hover-lift">Iibso</button>
+                </div>
+                <div class="glass-panel p-8 text-center hover-lift scale-105" data-vip="silver">
+                    <i class="fas fa-crown text-5xl text-gray-300 mb-4"></i>
+                    <h3 class="font-rajdhani text-3xl font-bold">SILVER</h3>
+                    <p class="text-4xl font-bold my-4 text-gray-300" id="priceSilver">$12.99</p>
+                    <button class="buy-btn w-full bg-gradient-to-r from-gray-600 to-gray-800 py-3 rounded-xl font-bold hover-lift">Iibso</button>
+                </div>
+                <div class="glass-panel p-8 text-center hover-lift" data-vip="gold">
+                    <i class="fas fa-crown text-5xl text-yellow-400 mb-4"></i>
+                    <h3 class="font-rajdhani text-3xl font-bold">GOLD</h3>
+                    <p class="text-4xl font-bold my-4 text-yellow-400" id="priceGold">$24.99</p>
+                    <button class="buy-btn w-full bg-gradient-to-r from-yellow-600 to-yellow-800 py-3 rounded-xl font-bold hover-lift">Iibso</button>
+                </div>
+            </div>
+
+            <!-- ADS IN SHOP -->
+            <div class="flex justify-center my-8">
+                <div class="ad-container" id="shopAd"></div>
+            </div>
+        </section>
+
+        <!-- FACTIONS SECTION -->
+        <section id="factions" class="spa-section">
+            <h2 class="text-3xl font-rajdhani font-bold text-glow mb-6"><i class="fas fa-people-arrows mr-3 text-purple-400"></i>Hoggaanka</h2>
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="glass-panel p-6 hover-lift">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center text-3xl text-blue-400">
+                            <i class="fas fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <div class="text-white/50 text-sm">POLICE</div>
+                            <div class="text-2xl font-bold" id="leaderPolice">Gen. Axmed</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 hover-lift">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center text-3xl text-red-400">
+                            <i class="fas fa-skull"></i>
+                        </div>
+                        <div>
+                            <div class="text-white/50 text-sm">MAFIA</div>
+                            <div class="text-2xl font-bold" id="leaderMafia">Don Cigaal</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 hover-lift">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center text-3xl text-green-400">
+                            <i class="fas fa-tank"></i>
+                        </div>
+                        <div>
+                            <div class="text-white/50 text-sm">ARMY</div>
+                            <div class="text-2xl font-bold" id="leaderArmy">Gen. Cali</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ADS IN FACTIONS -->
+            <div class="flex justify-center my-8">
+                <div class="ad-container" id="factionsAd"></div>
+            </div>
+        </section>
+
+        <!-- STAFF SECTION -->
+        <section id="staff" class="spa-section">
+            <h2 class="text-3xl font-rajdhani font-bold text-glow mb-6"><i class="fas fa-user-shield mr-3 text-purple-400"></i>Staff Team</h2>
+            <div id="staffGrid" class="grid md:grid-cols-4 gap-4 mb-8"></div>
+            
+            <!-- ADS IN STAFF -->
+            <div class="flex justify-center my-8">
+                <div class="ad-container" id="staffAd"></div>
+            </div>
+        </section>
+
+        <!-- STATS SECTION -->
+        <section id="stats" class="spa-section">
+            <h2 class="text-3xl font-rajdhani font-bold text-glow mb-6"><i class="fas fa-chart-line mr-3 text-purple-400"></i>Tirakoob</h2>
+            <div class="glass-panel p-6 mb-8">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span>Players Online</span>
+                            <span class="text-green-400" id="statPlayers">2,847</span>
+                        </div>
+                        <div class="w-full bg-gray-700 h-2 rounded-full">
+                            <div class="bg-green-500 h-2 rounded-full" id="playerBar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ADS IN STATS -->
+            <div class="flex justify-center my-8">
+                <div class="ad-container" id="statsAd"></div>
+            </div>
+        </section>
+
+        <!-- RULES SECTION -->
+        <section id="rules" class="spa-section">
+            <h2 class="text-3xl font-rajdhani font-bold text-glow mb-6"><i class="fas fa-gavel mr-3 text-purple-400"></i>Xeerarka</h2>
+            <div class="glass-panel p-8 mb-8">
+                <ul class="space-y-3">
+                    <li><i class="fas fa-circle text-purple-400 text-xs mr-2"></i>1.1 Respect all players</li>
+                    <li><i class="fas fa-circle text-purple-400 text-xs mr-2"></i>1.2 No cheating</li>
+                </ul>
+            </div>
+            
+            <!-- ADS IN RULES -->
+            <div class="flex justify-center my-8">
+                <div class="ad-container" id="rulesAd"></div>
+            </div>
+        </section>
+
+        <!-- ADMIN PAGE (FULL ADMIN PANEL) -->
+        <section id="adminpage" class="spa-section">
+            <div class="glass-panel p-8 border-2 border-red-500/60">
+                <h1 class="text-4xl font-rajdhani font-bold text-red-400 mb-6 text-center">
+                    <i class="fas fa-user-shield mr-3"></i>ADMIN CONTROL PANEL
+                </h1>
+                
+                <!-- Admin Login Warning -->
+                <div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4 mb-8 text-center">
+                    <i class="fas fa-exclamation-triangle text-red-400 text-2xl mb-2"></i>
+                    <p class="text-red-300">Waxaad u baahan tahay password-ka admin si aad wax u beddesho</p>
+                </div>
+
+                <!-- Admin Login Form -->
+                <div id="adminLoginPanel" class="max-w-md mx-auto mb-8">
+                    <div class="glass-panel-thick p-6">
+                        <input type="password" id="adminPagePassword" placeholder="Enter admin password" class="w-full bg-black/50 border border-red-500/30 rounded-lg p-4 mb-4 text-center text-xl">
+                        <button id="adminPageLogin" class="w-full bg-gradient-to-r from-red-600 to-red-800 py-4 rounded-xl font-bold text-lg hover-lift">
+                            <i class="fas fa-lock-open mr-2"></i>Access Admin Panel
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Admin Controls (Hidden until login) -->
+                <div id="adminControls" class="hidden space-y-8">
+                    <!-- Ads Management Section (300x300 Control) -->
+                    <div class="glass-panel-thick p-6 border border-purple-500/30">
+                        <h2 class="text-2xl font-rajdhani font-bold text-purple-400 mb-6">
+                            <i class="fas fa-ad mr-2"></i>Maamulka Ads-ka (300x300)
+                        </h2>
+                        
+                        <!-- Ads Grid Preview -->
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="text-center">
+                                <p class="text-sm text-white/50 mb-2">Home Ad</p>
+                                <div class="ad-container mx-auto" id="previewHomeAd"></div>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-sm text-white/50 mb-2">News Ad</p>
+                                <div class="ad-container mx-auto" id="previewNewsAd"></div>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-sm text-white/50 mb-2">Shop Ad</p>
+                                <div class="ad-container mx-auto" id="previewShopAd"></div>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-sm text-white/50 mb-2">Factions Ad</p>
+                                <div class="ad-container mx-auto" id="previewFactionsAd"></div>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-sm text-white/50 mb-2">Staff Ad</p>
+                                <div class="ad-container mx-auto" id="previewStaffAd"></div>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-sm text-white/50 mb-2">Stats Ad</p>
+                                <div class="ad-container mx-auto" id="previewStatsAd"></div>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-sm text-white/50 mb-2">Rules Ad</p>
+                                <div class="ad-container mx-auto" id="previewRulesAd"></div>
+                            </div>
+                        </div>
+
+                        <!-- Ad Settings -->
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <!-- Ad Image URL -->
+                            <div>
+                                <label class="block text-white/50 mb-2">Ad Image URL (300x300 recommended)</label>
+                                <input type="text" id="adImageUrl" placeholder="https://example.com/ad.jpg" class="w-full bg-black/50 border border-purple-500/30 rounded-lg p-3 mb-4">
+                                
+                                <label class="block text-white/50 mb-2">Ad Link (URL)</label>
+                                <input type="text" id="adLink" placeholder="https://example.com" class="w-full bg-black/50 border border-purple-500/30 rounded-lg p-3 mb-4">
+                                
+                                <label class="block text-white/50 mb-2">Ad Text (if no image)</label>
+                                <input type="text" id="adText" value="Buy VIP Now!" class="w-full bg-black/50 border border-purple-500/30 rounded-lg p-3 mb-4">
+                                
+                                <label class="block text-white/50 mb-2">Select Page</label>
+                                <select id="adPageSelect" class="w-full bg-black/50 border border-purple-500/30 rounded-lg p-3 mb-4">
+                                    <option value="home">Home Page</option>
+                                    <option value="news">News Page</option>
+                                    <option value="shop">Shop Page</option>
+                                    <option value="factions">Factions Page</option>
+                                    <option value="staff">Staff Page</option>
+                                    <option value="stats">Stats Page</option>
+                                    <option value="rules">Rules Page</option>
+                                    <option value="all">All Pages</option>
+                                </select>
+                                
+                                <button id="updateSingleAd" class="w-full bg-purple-500/30 hover:bg-purple-500/50 border border-purple-500 py-3 rounded-lg font-bold mb-4">
+                                    Update Selected Ad
+                                </button>
+                                <button id="updateAllAds" class="w-full bg-green-500/30 hover:bg-green-500/50 border border-green-500 py-3 rounded-lg font-bold">
+                                    Update All Ads
+                                </button>
+                            </div>
+
+                            <!-- Ad Preview & Templates -->
+                            <div>
+                                <label class="block text-white/50 mb-2">Ad Templates</label>
+                                <div class="grid grid-cols-2 gap-2 mb-4">
+                                    <button class="ad-template bg-purple-500/20 border border-purple-500/30 rounded-lg p-3 text-center hover:bg-purple-500/30" data-bg="purple">
+                                        <i class="fas fa-crown text-purple-400 text-2xl mb-1"></i>
+                                        <div class="text-sm">VIP Template</div>
+                                    </button>
+                                    <button class="ad-template bg-red-500/20 border border-red-500/30 rounded-lg p-3 text-center hover:bg-red-500/30" data-bg="red">
+                                        <i class="fas fa-fire text-red-400 text-2xl mb-1"></i>
+                                        <div class="text-sm">Hot Deal</div>
+                                    </button>
+                                    <button class="ad-template bg-green-500/20 border border-green-500/30 rounded-lg p-3 text-center hover:bg-green-500/30" data-bg="green">
+                                        <i class="fas fa-check text-green-400 text-2xl mb-1"></i>
+                                        <div class="text-sm">Limited</div>
+                                    </button>
+                                    <button class="ad-template bg-blue-500/20 border border-blue-500/30 rounded-lg p-3 text-center hover:bg-blue-500/30" data-bg="blue">
+                                        <i class="fas fa-car text-blue-400 text-2xl mb-1"></i>
+                                        <div class="text-sm">Vehicles</div>
+                                    </button>
+                                </div>
+                                
+                                <label class="block text-white/50 mb-2">Current Ad Preview (300x300)</label>
+                                <div class="ad-container mx-auto" id="adPreview">
+                                    <div class="ad-placeholder">
+                                        <i class="fas fa-image text-5xl text-purple-400 mb-3"></i>
+                                        <p class="text-purple-300">Ad Preview</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other Admin Controls (from previous) -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Leaders Control -->
+                        <div class="glass-panel-thick p-6">
+                            <h3 class="font-rajdhani text-xl font-bold text-red-400 mb-4">Hoggaanka</h3>
+                            <input type="text" id="adminLeaderPolice" placeholder="Police Leader" class="w-full bg-black/50 border border-red-500/30 rounded-lg p-3 mb-2">
+                            <input type="text" id="adminLeaderMafia" placeholder="Mafia Leader" class="w-full bg-black/50 border border-red-500/30 rounded-lg p-3 mb-2">
+                            <input type="text" id="adminLeaderArmy" placeholder="Army Leader" class="w-full bg-black/50 border border-red-500/30 rounded-lg p-3 mb-2">
+                            <button id="saveLeadersAdmin" class="w-full bg-red-500/30 hover:bg-red-500/50 border border-red-500 py-3 rounded-lg font-bold">Save Leaders</button>
+                        </div>
+
+                        <!-- Prices Control -->
+                        <div class="glass-panel-thick p-6">
+                            <h3 class="font-rajdhani text-xl font-bold text-red-400 mb-4">Qiimaha VIP</h3>
+                            <input type="number" id="adminBronzePrice" placeholder="Bronze Price" class="w-full bg-black/50 border border-red-500/30 rounded-lg p-3 mb-2">
+                            <input type="number" id="adminSilverPrice" placeholder="Silver Price" class="w-full bg-black/50 border border-red-500/30 rounded-lg p-3 mb-2">
+                            <input type="number" id="adminGoldPrice" placeholder="Gold Price" class="w-full bg-black/50 border border-red-500/30 rounded-lg p-3 mb-2">
+                            <button id="savePricesAdmin" class="w-full bg-red-500/30 hover:bg-red-500/50 border border-red-500 py-3 rounded-lg font-bold">Save Prices</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAYMENT MODAL -->
+    <div id="paymentModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden justify-center items-center z-50">
+        <div class="glass-panel-thick max-w-md w-full p-8">
+            <h3 class="font-rajdhani text-2xl font-bold mb-4">EVC PLUS Payment</h3>
+            <p class="text-2xl font-mono bg-black/50 p-4 rounded-lg text-green-400 break-all" id="paymentCode">*712*1234*100#</p>
+            <button id="closeModal" class="mt-6 w-full bg-purple-500/30 py-3 rounded-lg">Close</button>
+        </div>
+    </div>
+
+    <!-- ADMIN LOGIN FLOATING (Quick Access) -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <div id="quickAdminBox" class="glass-panel-thick p-4 w-64">
+            <input type="password" id="quickAdminPass" placeholder="Quick admin login" class="w-full bg-black/50 border border-red-500/30 rounded-lg p-3 mb-3 text-sm">
+            <button id="quickAdminBtn" class="w-full bg-red-500/30 hover:bg-red-500/50 py-3 rounded-lg text-sm">Quick Login</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ==================== INITIALIZATION ====================
+            const toast = document.getElementById('toast');
+            
+            function showToast(msg, duration = 2000) {
+                toast.textContent = msg;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), duration);
+            }
+
+            // ==================== SPA NAVIGATION ====================
+            const sections = document.querySelectorAll('.spa-section');
+            const navBtns = document.querySelectorAll('.nav-btn');
+            
+            function showSection(id) {
+                sections.forEach(s => s.classList.remove('active-section'));
+                document.getElementById(id).classList.add('active-section');
+                navBtns.forEach(btn => btn.classList.remove('bg-purple-500/20', 'text-white'));
+                document.querySelector(`[data-section="${id}"]`).classList.add('bg-purple-500/20', 'text-white');
+            }
+            
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', () => showSection(btn.dataset.section));
+            });
+
+            // ==================== ADMIN AUTH ====================
+            const quickPass = document.getElementById('quickAdminPass');
+            const quickBtn = document.getElementById('quickAdminBtn');
+            const adminPagePass = document.getElementById('adminPagePassword');
+            const adminPageLogin = document.getElementById('adminPageLogin');
+            const adminControls = document.getElementById('adminControls');
+            const adminLoginPanel = document.getElementById('adminLoginPanel');
+
+            function enableAdminMode() {
+                document.body.classList.add('admin-mode');
+                if(adminControls) adminControls.classList.remove('hidden');
+                if(adminLoginPanel) adminLoginPanel.classList.add('hidden');
+                showToast('✅ Admin mode activated');
+            }
+
+            quickBtn.addEventListener('click', () => {
+                if(quickPass.value === '6661') {
+                    enableAdminMode();
+                    quickPass.value = '';
+                } else {
+                    showToast('❌ Invalid password');
+                }
+            });
+
+            adminPageLogin?.addEventListener('click', () => {
+                if(adminPagePass?.value === '6661') {
+                    enableAdminMode();
+                } else {
+                    showToast('❌ Invalid password');
+                }
+            });
+
+            // ==================== ADS SYSTEM ====================
+            // Ad storage
+            let ads = {
+                home: { type: 'image', url: '', link: '#', text: 'Special Offer!', bg: 'purple' },
+                news: { type: 'image', url: '', link: '#', text: 'Join Now!', bg: 'red' },
+                shop: { type: 'image', url: '', link: '#', text: 'VIP 50% Off', bg: 'green' },
+                factions: { type: 'image', url: '', link: '#', text: 'Join Faction', bg: 'blue' },
+                staff: { type: 'image', url: '', link: '#', text: 'Staff Apply', bg: 'purple' },
+                stats: { type: 'image', url: '', link: '#', text: 'Server Stats', bg: 'red' },
+                rules: { type: 'image', url: '', link: '#', text: 'Read Rules', bg: 'green' }
+            };
+
+            // Ad containers mapping
+            const adContainers = {
+                home: document.getElementById('homeAd'),
+                news: document.getElementById('newsAd'),
+                shop: document.getElementById('shopAd'),
+                factions: document.getElementById('factionsAd'),
+                staff: document.getElementById('staffAd'),
+                stats: document.getElementById('statsAd'),
+                rules: document.getElementById('rulesAd')
+            };
+
+            // Preview containers
+            const previewContainers = {
+                home: document.getElementById('previewHomeAd'),
+                news: document.getElementById('previewNewsAd'),
+                shop: document.getElementById('previewShopAd'),
+                factions: document.getElementById('previewFactionsAd'),
+                staff: document.getElementById('previewStaffAd'),
+                stats: document.getElementById('previewStatsAd'),
+                rules: document.getElementById('previewRulesAd')
+            };
+
+            // Function to render an ad in a container
+            function renderAd(container, adData) {
+                if (!container) return;
+                
+                if (adData.url) {
+                    // Image ad
+                    container.innerHTML = `<a href="${adData.link}" target="_blank"><img src="${adData.url}" alt="Ad" class="ad-image" onerror="this.parentElement.innerHTML=this.parentElement.innerHTML"></a>`;
+                } else {
+                    // Text ad with gradient
+                    const gradients = {
+                        purple: 'from-purple-600 to-purple-800',
+                        red: 'from-red-600 to-red-800',
+                        green: 'from-green-600 to-green-800',
+                        blue: 'from-blue-600 to-blue-800'
+                    };
+                    const gradient = gradients[adData.bg] || 'from-purple-600 to-purple-800';
+                    
+                    container.innerHTML = `
+                        <a href="${adData.link}" target="_blank">
+                            <div class="ad-placeholder bg-gradient-to-br ${gradient}">
+                                <i class="fas fa-crown text-5xl text-white mb-3"></i>
+                                <p class="text-white font-bold text-xl">${adData.text}</p>
+                                <p class="text-white/70 text-sm mt-2">Click to learn more</p>
+                            </div>
+                        </a>
+                    `;
+                }
+            }
+
+            // Render all ads
+            function renderAllAds() {
+                for (let page in ads) {
+                    renderAd(adContainers[page], ads[page]);
+                    renderAd(previewContainers[page], ads[page]);
+                }
+            }
+
+            // Initial render
+            renderAllAds();
+
+            // Ad management inputs
+            const adImageUrl = document.getElementById('adImageUrl');
+            const adLink = document.getElementById('adLink');
+            const adText = document.getElementById('adText');
+            const adPageSelect = document.getElementById('adPageSelect');
+            const updateSingleBtn = document.getElementById('updateSingleAd');
+            const updateAllBtn = document.getElementById('updateAllAds');
+            const adPreview = document.getElementById('adPreview');
+
+            // Update preview when inputs change
+            function updatePreview() {
+                const previewAd = {
+                    type: 'image',
+                    url: adImageUrl.value,
+                    link: adLink.value || '#',
+                    text: adText.value || 'Ad',
+                    bg: 'purple'
+                };
+                renderAd(adPreview, previewAd);
+            }
+
+            adImageUrl.addEventListener('input', updatePreview);
+            adLink.addEventListener('input', updatePreview);
+            adText.addEventListener('input', updatePreview);
+
+            // Template buttons
+            document.querySelectorAll('.ad-template').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const bg = btn.dataset.bg;
+                    adText.value = `Special ${bg} offer!`;
+                    updatePreview();
+                });
+            });
+
+            // Update single ad
+            updateSingleBtn.addEventListener('click', () => {
+                const page = adPageSelect.value;
+                if (page === 'all') {
+                    for (let p in ads) {
+                        ads[p] = {
+                            url: adImageUrl.value,
+                            link: adLink.value || '#',
+                            text: adText.value || 'Special Offer',
+                            bg: 'purple'
+                        };
+                    }
+                    showToast('✅ All ads updated!');
+                } else {
+                    ads[page] = {
+                        url: adImageUrl.value,
+                        link: adLink.value || '#',
+                        text: adText.value || 'Special Offer',
+                        bg: 'purple'
+                    };
+                    showToast(`✅ ${page} ad updated!`);
+                }
+                renderAllAds();
+            });
+
+            // Update all ads
+            updateAllBtn.addEventListener('click', () => {
+                for (let p in ads) {
+                    ads[p] = {
+                        url: adImageUrl.value,
+                        link: adLink.value || '#',
+                        text: adText.value || 'Special Offer',
+                        bg: 'purple'
+                    };
+                }
+                renderAllAds();
+                showToast('✅ All ads updated!');
+            });
+
+            // ==================== OTHER CONTROLS ====================
+            // Leaders
+            document.getElementById('saveLeadersAdmin')?.addEventListener('click', () => {
+                document.getElementById('leaderPolice').textContent = document.getElementById('adminLeaderPolice').value;
+                document.getElementById('leaderMafia').textContent = document.getElementById('adminLeaderMafia').value;
+                document.getElementById('leaderArmy').textContent = document.getElementById('adminLeaderArmy').value;
+                showToast('✅ Leaders updated');
+            });
+
+            // Prices
+            document.getElementById('savePricesAdmin')?.addEventListener('click', () => {
+                document.getElementById('priceBronze').textContent = '$' + document.getElementById('adminBronzePrice').value;
+                document.getElementById('priceSilver').textContent = '$' + document.getElementById('adminSilverPrice').value;
+                document.getElementById('priceGold').textContent = '$' + document.getElementById('adminGoldPrice').value;
+                showToast('✅ Prices updated');
+            });
+
+            // ==================== LIVE COUNTER ====================
+            const playerCount = document.getElementById('playerCount');
+            const statPlayers = document.getElementById('statPlayers');
+            const playerBar = document.getElementById('playerBar');
+            
+            setInterval(() => {
+                const newCount = Math.floor(Math.random() * 500) + 2500;
+                playerCount.textContent = newCount.toLocaleString();
+                if(statPlayers) statPlayers.textContent = newCount.toLocaleString();
+                const percent = (newCount / 3500) * 100;
+                if(playerBar) playerBar.style.width = percent + '%';
+            }, 5000);
+
+            // ==================== NEWS ====================
+            const newsContainer = document.getElementById('newsContainer');
+            const newsItems = [
+                { title: 'Major Update 2.5.0', content: 'New vehicles and weapons', type: 'update', date: '2 hours ago' },
+                { title: 'Double XP Weekend!', content: '2x experience in all activities', type: 'event', date: '1 day ago' }
+            ];
+            
+            newsContainer.innerHTML = newsItems.map(item => `
+                <div class="glass-panel p-6">
+                    <span class="bg-purple-500/20 text-purple-300 text-xs px-3 py-1 rounded-full">${item.type}</span>
+                    <h3 class="text-2xl font-rajdhani font-bold mt-2">${item.title}</h3>
+                    <p class="text-white/70">${item.content}</p>
+                    <span class="text-white/40 text-sm mt-2 block">${item.date}</span>
+                </div>
+            `).join('');
+
+            // ==================== STAFF ====================
+            const staffGrid = document.getElementById('staffGrid');
+            const staffMembers = [
+                { name: 'Xasan', role: 'Owner', icon: 'fa-crown', color: 'red' },
+                { name: 'Khadar', role: 'Admin', icon: 'fa-shield', color: 'purple' },
+                { name: 'Sami', role: 'Mod', icon: 'fa-shield', color: 'blue' },
+                { name: 'Hodan', role: 'Mod', icon: 'fa-shield', color: 'blue' }
+            ];
+            
+            staffGrid.innerHTML = staffMembers.map(m => `
+                <div class="glass-panel p-6 text-center">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-${m.color}-500/20 flex items-center justify-center text-3xl text-${m.color}-400 mb-3">
+                        <i class="fas ${m.icon}"></i>
+                    </div>
+                    <div class="font-bold">${m.name}</div>
+                    <div class="text-${m.color}-400 text-sm">${m.role}</div>
+                </div>
+            `).join('');
+
+            // ==================== PAYMENT MODAL ====================
+            const modal = document.getElementById('paymentModal');
+            const closeModal = document.getElementById('closeModal');
+            const paymentCode = document.getElementById('paymentCode');
+
+            document.querySelectorAll('.buy-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const plan = e.target.closest('[data-vip]')?.dataset.vip || 'bronze';
+                    const codes = { bronze: '*712*1234*150#', silver: '*712*1234*300#', gold: '*712*1234*600#' };
+                    paymentCode.textContent = codes[plan];
+                    modal.style.display = 'flex';
+                });
+            });
+
+            closeModal.addEventListener('click', () => modal.style.display = 'none');
+            window.addEventListener('click', (e) => {
+                if(e.target === modal) modal.style.display = 'none';
+            });
+        })();
+    </script>
+
+    <style>
+        /* Additional styles */
+        .ad-container {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+        
+        .admin-page .glass-panel {
+            border-color: #dc2626;
+        }
+        
+        #adminControls {
+            transition: all 0.3s;
+        }
+        
+        @media (max-width: 640px) {
+            .ad-container {
+                width: 250px;
+                height: 250px;
+            }
+        }
+    </style>
+</body>
+</html>
